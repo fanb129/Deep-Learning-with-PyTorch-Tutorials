@@ -1,6 +1,7 @@
 import numpy as np
 
 # y = wx + b
+# 计算给定点集的误差
 def compute_error_for_line_given_points(b, w, points):
     totalError = 0
     for i in range(0, len(points)):
@@ -9,6 +10,7 @@ def compute_error_for_line_given_points(b, w, points):
         totalError += (y - (w * x + b)) ** 2
     return totalError / float(len(points))
 
+# 计算给定点集的梯度
 def step_gradient(b_current, w_current, points, learningRate):
     b_gradient = 0
     w_gradient = 0
@@ -22,6 +24,7 @@ def step_gradient(b_current, w_current, points, learningRate):
     new_m = w_current - (learningRate * w_gradient)
     return [new_b, new_m]
 
+# 运行梯度下降算法
 def gradient_descent_runner(points, starting_b, starting_m, learning_rate, num_iterations):
     b = starting_b
     m = starting_m
@@ -30,7 +33,9 @@ def gradient_descent_runner(points, starting_b, starting_m, learning_rate, num_i
     return [b, m]
 
 def run():
-    points = np.genfromtxt("data.csv", delimiter=",")
+    import os
+    print(os.getcwd())
+    points = np.genfromtxt("lesson04-简单回归案例实战\data.csv", delimiter=",")
     learning_rate = 0.0001
     initial_b = 0 # initial y-intercept guess
     initial_m = 0 # initial slope guess
